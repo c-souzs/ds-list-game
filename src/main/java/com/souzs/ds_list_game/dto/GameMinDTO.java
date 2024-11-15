@@ -1,6 +1,7 @@
 package com.souzs.ds_list_game.dto;
 
 import com.souzs.ds_list_game.entities.Game;
+import com.souzs.ds_list_game.projections.GameMinProjection;
 
 // Representa os dados resumidos de uma entidade
 // Nao precisa de metodos SET, pois apenas representa
@@ -31,6 +32,14 @@ public class GameMinDTO {
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         shortDescription = entity.getShortDescription();
+    }
+
+    public GameMinDTO(GameMinProjection projection) {
+        id = projection.getId();
+        title = projection.getTitle();
+        year = projection.getYear();
+        imgUrl = projection.getImgUrl();
+        shortDescription = projection.getShortDescription();
     }
 
     public Long getId() {
