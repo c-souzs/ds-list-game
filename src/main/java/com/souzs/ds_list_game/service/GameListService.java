@@ -1,6 +1,7 @@
 package com.souzs.ds_list_game.service;
 
 import com.souzs.ds_list_game.dto.GameListDTO;
+import com.souzs.ds_list_game.dto.GameMinDTO;
 import com.souzs.ds_list_game.entities.GameList;
 import com.souzs.ds_list_game.projections.GameMinProjection;
 import com.souzs.ds_list_game.repositories.GameListRepository;
@@ -44,5 +45,14 @@ public class GameListService {
         }
 
         return list;
+    }
+
+    @Transactional
+    public List<GameMinDTO> insertGame(Long listId, Long gameId) {
+        int position = gameRepository.searchByList(listId).size() - 1;
+
+        gameListRepository.insertNewGameInPosition(listId, gameId, position);
+
+        return gameRepository.searchByList(listId).stream().map(GameMinDTO::new).toList();
     }
 }

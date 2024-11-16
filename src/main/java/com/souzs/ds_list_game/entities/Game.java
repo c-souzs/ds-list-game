@@ -1,6 +1,8 @@
 package com.souzs.ds_list_game.entities;
 
+import com.souzs.ds_list_game.dto.GameDTO;
 import jakarta.persistence.*;
+import org.springframework.beans.BeanUtils;
 
 import java.util.Objects;
 
@@ -36,6 +38,10 @@ public class Game {
         this.imgUrl = imgUrl;
         this.shortDescription = shortDescription;
         this.longDescription = longDescription;
+    }
+
+    public Game(GameDTO gameDTO) {
+        BeanUtils.copyProperties(gameDTO, this);
     }
 
     @Override

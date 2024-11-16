@@ -40,4 +40,12 @@ public class GameService {
 
         return result.stream().map(GameMinDTO::new).toList();
     }
+
+    @Transactional
+    public GameDTO createGame(GameDTO gameDTO) {
+        Game createGame = new Game(gameDTO);
+        gameRepository.save(createGame);
+
+        return new GameDTO(createGame);
+    }
 }
