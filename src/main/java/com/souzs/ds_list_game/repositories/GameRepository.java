@@ -3,6 +3,7 @@ package com.souzs.ds_list_game.repositories;
 import com.souzs.ds_list_game.entities.Game;
 import com.souzs.ds_list_game.projections.GameMinProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -18,4 +19,8 @@ public interface GameRepository  extends JpaRepository<Game, Long> {
 		ORDER BY tb_belonging.position
 			""")
     List<GameMinProjection> searchByList(Long listId);
+
+	@Modifying
+	@Query(nativeQuery = true, value = "DELETE FROM tb_belonging WHERE game_id = :gameId")
+	void deleteGameBelonging(Long gameId);
 }

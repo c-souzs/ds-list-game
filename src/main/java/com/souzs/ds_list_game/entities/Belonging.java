@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "tb_belonging")
 public class Belonging {
-    @EmbeddedId
+    @EmbeddedId // Indica que o campo e uma chave composta
     private BelongingPK id;
     private Integer position;
 

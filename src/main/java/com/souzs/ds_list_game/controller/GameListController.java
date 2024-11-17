@@ -39,4 +39,9 @@ public class GameListController {
     public List<GameMinDTO> insertGame(@PathVariable Long listId, @RequestBody GameIdDTO body) {
         return gameListService.insertGame(listId, body.getGameId());
     }
+
+    @DeleteMapping(value = "/{listId}/{gameId}")
+    public void removeGame(@PathVariable Long listId, @PathVariable Long gameId) {
+        gameListService.removeGame(listId, gameId);
+    }
 }

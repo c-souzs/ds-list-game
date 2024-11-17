@@ -44,15 +44,30 @@ public class GameListService {
             );
         }
 
-        return list;
+        return gameRepository.searchByList(listId);
     }
 
     @Transactional
     public List<GameMinDTO> insertGame(Long listId, Long gameId) {
-        int position = gameRepository.searchByList(listId).size() - 1;
+        int position = gameRepository.searchByList(listId).size();
 
         gameListRepository.insertNewGameInPosition(listId, gameId, position);
 
         return gameRepository.searchByList(listId).stream().map(GameMinDTO::new).toList();
+    }
+
+    @Transactional
+    public void removeGame(Long listId, Long gameId) {
+        int positionGameRemove = gameListRepository.getPositionGame(listId, gameId);
+        gameListRepository.removeGame(listId, gameId);
+        List<GameMinProjection> list = gameRepository.searchByList(listId);
+
+        for (int i = positionGameRemove; i <= list.size() - 1; i++) {
+            gameListRepository.updateBelongingPosition(
+                    listId,
+                    list.get(i).getId(),
+                    i
+            );
+        }
     }
 }

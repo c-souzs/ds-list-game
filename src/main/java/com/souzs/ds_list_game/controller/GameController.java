@@ -34,4 +34,9 @@ public class GameController {
     public GameDTO createGame(@RequestBody GameDTO body) {
         return gameService.createGame(body);
     }
+
+    @DeleteMapping(value = "/{id}")
+    public Long removeGame(@PathVariable Long id) {
+        return gameService.deleteGame(id);
+    }
 }

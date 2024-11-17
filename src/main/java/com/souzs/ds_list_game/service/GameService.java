@@ -4,6 +4,7 @@ import com.souzs.ds_list_game.dto.GameDTO;
 import com.souzs.ds_list_game.dto.GameMinDTO;
 import com.souzs.ds_list_game.entities.Game;
 import com.souzs.ds_list_game.projections.GameMinProjection;
+import com.souzs.ds_list_game.repositories.GameListRepository;
 import com.souzs.ds_list_game.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,8 @@ public class GameService {
     // Com isso podemos usar aqui na Service
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private GameListRepository gameListRepository;
 
     @Transactional(readOnly = true) // Nenhuma operacao de escrita
     public List<GameMinDTO> findAll() {
@@ -47,5 +50,29 @@ public class GameService {
         gameRepository.save(createGame);
 
         return new GameDTO(createGame);
+    }
+
+    @Transactional
+    public Long deleteGame(Long gameId) {
+        List<Long> listsIds = gameListRepository.getListsIdsByGameId(gameId);
+
+        listsIds.forEach(listId -> {
+            List<GameMinProjection> list = gameRepository.searchByList(listId);
+            int positionGameRemove = gameListRepository.getPositionGame(listId, gameId);
+            list.remove(positionGameRemove);
+
+            for (int i = positionGameRemove; i <= list.size() - 1; i++) {
+                gameListRepository.updateBelongingPosition(
+                        listId,
+                        list.get(i).getId(),
+                        i
+                );
+            }
+        });
+
+        gameRepository.deleteGameBelonging(gameId);
+        gameRepository.deleteById(gameId);
+
+        return gameId;
     }
 }
