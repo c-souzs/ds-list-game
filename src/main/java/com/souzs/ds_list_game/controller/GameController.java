@@ -5,7 +5,6 @@ package com.souzs.ds_list_game.controller;
 
 import com.souzs.ds_list_game.dto.GameDTO;
 import com.souzs.ds_list_game.dto.GameMinDTO;
-import com.souzs.ds_list_game.entities.Game;
 import com.souzs.ds_list_game.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -38,5 +37,10 @@ public class GameController {
     @DeleteMapping(value = "/{id}")
     public Long removeGame(@PathVariable Long id) {
         return gameService.deleteGame(id);
+    }
+
+    @PutMapping(value = "/{id}")
+    public GameDTO updateGame(@PathVariable Long id, @RequestBody GameDTO body) {
+        return gameService.updateGame(id, body);
     }
 }

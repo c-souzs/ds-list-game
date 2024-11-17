@@ -6,6 +6,8 @@ import com.souzs.ds_list_game.entities.Game;
 import com.souzs.ds_list_game.projections.GameMinProjection;
 import com.souzs.ds_list_game.repositories.GameListRepository;
 import com.souzs.ds_list_game.repositories.GameRepository;
+import jakarta.persistence.Column;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +76,22 @@ public class GameService {
         gameRepository.deleteById(gameId);
 
         return gameId;
+    }
+
+    @Transactional
+    public GameDTO updateGame(Long id, GameDTO gameDTO) {
+        Game updateGame = gameRepository.findById(id).get();
+
+        updateGame.setTitle(gameDTO.getTitle());
+        updateGame.setYear(gameDTO.getYear());
+        updateGame.setGenre(gameDTO.getGenre());
+        updateGame.setPlatforms(gameDTO.getPlatforms());
+        updateGame.setScore(gameDTO.getScore());
+        updateGame.setImgUrl(gameDTO.getImgUrl());
+        updateGame.setShortDescription(gameDTO.getShortDescription());
+        updateGame.setLongDescription(gameDTO.getLongDescription());
+
+
+        return new GameDTO(updateGame);
     }
 }
