@@ -30,15 +30,28 @@ A relação de jogo, lista e posição é baseado conforme o diagrama UML abaixo
 
 ### 🌐 API Endpoints.
 
-Host: **http://localhost:8080**
+Host: ```http://localhost:8080```
 
 ##### Game
 
-\`\`\`markdown - Cadastra jogo: - POST /games - Lista todas as informações de todos os jogos: - GET /games - Lista todas as informações de jogo, por ID: - GET /games/{id} - Atualiza as informações de um jogo, por ID: - PUT /games/{id} - Remove um jogo, por ID: - DELETE /games/{id} \`\`\`
+```
+-Cadastra jogo:                                       - POST /games
+-Lista todas as informações de todos os jogos:        - GET /games
+-Lista todas as informações de jogo, por ID:          - GET /games/{id}
+-Atualiza as informações de um jogo, por ID:          - PUT /games/{id}
+-Remove um jogo, por ID:                              - DELETE /games/{id}
+```
+
 
 ##### Game List
 
-\`\`\`markdown - Adiciona um jogo a uma lista: - POST /lists/{id} - Atualiza a posição de um jogo ordenado na lista: - POST /lists/{id} - Lista todos os jogos da lista, ordenado por posição: - GET /lists/{id}/games - Lista todas as listas de jogos: - GET /lists - Remove um jogo de uma lista, por ID: - DELETE /lists/{id}/{idGame} \`\`\`
+```
+-Adiciona um jogo a uma lista:                               - POST /lists/{id}
+-Atualiza a posição de um jogo ordenado na lista:            - POST /lists/{id}
+-Lista todos os jogos da lista, ordenado por posição:        - GET /lists/{id}/games
+-Lista todas as listas de jogos:                             - GET /lists - Remove um jogo de uma lista, por ID:
+-DELETE /lists/{id}/{idGame} 
+```
 
 📚 Aprendizados.
 ================
@@ -66,12 +79,23 @@ Requisitos iniciais:
 
 Executando o projeto:
 
-*   Acesse uma pasta e clone o repositório: \`\`\` git clone https://github.com/c-souzs/ds-list-game.git \`\`\`
+*   Acesse uma pasta e clone o repositório:
+  ``` git clone https://github.com/c-souzs/ds-list-game.git ```
 *   Abra o projeto em sua IDE e execute
-*   A princípio vamos usar o banco de teste H2, as informações para acessar a tela do mesmo está no arquivo: \`\`\` ...\\ds-list-game\\src\\main\\resources\\application-test.properties \`\`\` No navegador, acesse: \`\`\` http://localhost:8080/h2-console/login.jsp \`\`\`
-Pronto! Caso deseje alterar entre os ambientes de teste, desenvolvimento e produção altere o perfile ativo no arquivo \`\`\` ...\\ds-list-game\\src\\main\\resources\\application.properties spring.profiles.active=${APP\_PROFILE:test} spring.profiles.active=${APP\_PROFILE:dev} spring.profiles.active=${APP\_PROFILE:prod} \`\`\`
+*   A princípio vamos usar o banco de teste H2, as informações para acessar a tela do mesmo está no arquivo: </br>
+  ``` ...\\ds-list-game\\src\\main\\resources\\application-test.properties ```
+*   No navegador, acesse: ``` http://localhost:8080/h2-console/login.jsp ```
+Pronto! Caso deseje alterar entre os ambientes de teste, desenvolvimento e produção altere o perfile ativo no arquivo
+```
+  ...\\ds-list-game\\src\\main\\resources\\application.properties
+  spring.profiles.active=${APP\_PROFILE:test}
+  spring.profiles.active=${APP\_PROFILE:dev}
+  spring.profiles.active=${APP\_PROFILE:prod}
+```
 
-**Obs:** Ao alterar para o ambiente de desenvolvimento, descomente as 4 primeiras linha do arquivo: \`\`\` ...\\ds-list-game\\src\\main\\resources\\application-dev.properties \`\`\` Execute uma vez o projeto, comente novamente as linhas, execute novamente.
+**Obs:** Ao alterar para o ambiente de desenvolvimento, descomente as 4 primeiras linha do arquivo: 
+  ``` ...\\ds-list-game\\src\\main\\resources\\application-dev.properties ``` 
+  Execute uma vez o projeto, comente novamente as linhas, execute novamente.
 
 ✏️ Autor.
 =========
